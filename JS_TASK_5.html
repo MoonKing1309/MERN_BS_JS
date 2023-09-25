@@ -33,11 +33,16 @@
         {
             text-decoration: none;
         }
+        input:focus,textarea:focus
+        {
+            outline:none;
+        }
+
     </style>
 </head>
 <body>
     <div>
-        <form action="" novalidate>
+        <form novalidate id="form">
             <table>
                 <tr>
                     <td><label for="n">Name:</label></td>
@@ -56,12 +61,11 @@
                 </tr>
                 <tr>
                     <td><label for="msg">Message:</label></td>
-                    <td><textarea name="msg" id="msg" cols="30" rows="5"></textarea></td>
+                    <td><textarea id="msg" cols="30" rows="5"></textarea></td>
                     <td><p class="warning-text" id="o4"></p></td>
                 </tr>
             </table>
-            <button type="submit" id="end" ><a href="#">Submit</a></button>
-            <h1 id="output"></h1>
+            <button type="submit" id="end" >Submit</button>
         </form>
     </div>
     
@@ -75,17 +79,17 @@
         const o2 = document.getElementById("o2");
         const o3 = document.getElementById("o3");
         const o4 = document.getElementById("o4");
-        const o5 = document.getElementById("output");
         let link_state=0,name_state=0,email_state=0,msg_state=0;
-        
+
+        const form = document.getElementById('form')
+        function handleForm(event) { event.preventDefault(); } 
+        form.addEventListener('submit', handleForm);
 
         name.oninput = ()=>
         {
             let name_var = name.value;
             o1.removeAttribute('class');
             n.removeAttribute('class');
-            output.innerText='';
-            output.removeAttribute('class')
             if(!name_var)
             {
                 o1.classList.add('warning-text');
@@ -115,8 +119,6 @@
             let email_var = email.value;
             o2.removeAttribute('class');
             e.removeAttribute('class');
-            output.removeAttribute('class')
-            output.innerText='';
             if(!email_var)
             {
                 o2.classList.add('warning-text');
@@ -146,8 +148,7 @@
             let link_var = link.value;
             o3.removeAttribute('class');
             link.removeAttribute('class');
-            output.removeAttribute('class')
-            output.innerText='';
+            
             if(!link_var)
             {
                 o3.classList.add('warning-text');
@@ -179,8 +180,6 @@
             let msg_var = msg.value;
             o4.removeAttribute('class');
             msg.removeAttribute('class');
-            output.removeAttribute('class')
-            output.innerText='';
             if(!msg_var)
             {
                 o4.classList.add('warning-text');
@@ -197,17 +196,12 @@
                 msg_state=1;
             }
         }
+
         submit.onclick = ()=>
         {
             if(name_state==1 && email_state==1 && link_state==1 && msg_state==1)
             {
-                output.innerText="FORM VALID";
-                output.classList.add("success-text");
-            }
-            else
-            {
-                output.innerText="FORM INVALID";
-                output.classList.add("warning-text");
+                location.assign("https://ethnus.com/")
             }
 
 
