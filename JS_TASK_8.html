@@ -239,7 +239,7 @@
             </p>
 
             <p align="center">
-                <button type="submit" id="register"> <a href="" id="none" disabled>REGISTER</a></button>
+                <button type="submit" id="register">REGISTER</button>
             </p>
             <p align="center" id="voi" ></p>
         </form>
@@ -612,8 +612,10 @@
                 output.innerText=''
                 if(declare.checked)
                 {
-                    link.removeAttribute('disabled') 
-                    link.href='https://ethnus.com/';
+                  register.onclick =()=>
+                  {
+                    location.assign("https://ethnus.com/")
+                  }
 
                 }
                 else
