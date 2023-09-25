@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS_TASK_6-1</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <style>
+        .container {
+            display: relative;
+            background-color: rgb(246, 246, 246);
+            max-width: 300px;
+            margin-top: 100px;
+            padding: 20px;
+            border:2 px outset black;
+
+        }
+
+        .title {
+            text-align: center;
+            font-style: italic;
+            font-weight: 300;
+        }
+        .content
+        {
+            text-align: center;
+            font-weight: 100;
+        }
+
+
+        .input-group-text {
+            background-color: rgb(229, 234, 237);
+            margin: 0px;
+        }
+        button
+        {
+            min-width: 100%;
+        }
+
+        .form-check-label
+        {
+            font-size: smaller;
+        }
+
+        .form-check
+        {
+            display: inline-block;
+        }
+        a:link
+        {
+            text-decoration: none;
+            font-size: smaller;
+        }
+        .xtra
+        {
+            font-weight: 200;
+        }
+        
+       #floatingepu
+       {
+        color: rgba(0,0,0,0.5);
+        font-size: smaller;
+       }
+       .warning-field {
+            border-color: red;
+        }
+
+        .warning-text {
+            color: red !important;
+        }
+
+        .success-field {
+            border-color: green;
+        }
+
+        .success-text {
+            color: green !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mb-3">
+        <h1 class="title">Instagram</h1>
+        <h6 class="content">Enter your email, phone, or username and we'll send you a link to get back into your account.</h6>
+        <div class="col-12">
+            <form novalidate autocomplete="off">
+                <div class="col-12 mt-3">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"><img src="./email.png" alt=""></span>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="epu" placeholder="Email,Phone,Username">
+                            <label for="un" id="floatingepu">Email,Phone or Username</label>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="col-12 mb-3">
+                        <button class="btn btn-primary" type="submit" id="login" disabled>Send login link</button>
+                </div>
+                <div class="col-12">
+                        <div class="d-flex justify-content-center">
+                            <a href="./JS_TASK_6-0.html">Back to login</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <p class = "xtra" align="center">Don't have an account! <a href="./JS_TASK_6-2.html">Sign up here.</a></p>
+    
+    <script>
+        const sendlink = document.getElementById("login");
+        const epu_inp = document.getElementById("epu");
+        const o1 = document.getElementById("floatingepu");
+       
+        epu_inp.oninput = ()=>
+        {
+            
+            o1.innerText = "Email,Phone or Username";
+            o1.classList.remove('warning-text');
+            o1.classList.remove('success-text');
+            epu_inp.classList.remove('success-field');
+            epu_inp.classList.remove('warning-field');
+            let input_val = epu_inp.value;
+            
+            if(!input_val)
+            {
+                o1.innerText = "This field is required!";
+                o1.classList.add('warning-text');
+                epu_inp.classList.add('warning-field');
+                sendlink.disabled=true;
+            }
+            else
+            {
+                o1.innerText = "Valid!";
+                o1.classList.add('success-text');
+                epu_inp.classList.add('success-field');
+                sendlink.disabled=false;
+
+            }
+        }
+
+        sendlink.onclick = ()=>{
+            alert("If provided input exists in our database,login link will be sent!")
+        
+        }
+    /*
+        const sendlink = document.getElementById("login");
+        
+        login.onclick = ()=>
+        {
+            open('./JS_TASK_6-0.html/?flag=0','_blank');
+        }*/
+    </script>
+</body>
+</html>

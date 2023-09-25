@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS_TASK_7</title>
+    <style>
+        .text
+        {
+            color: rgb(0,2,111);
+            font-size: 30px;
+            font-weight: 700;
+        }
+        body
+        {
+            background-color: rgb(250,250,250);
+        }
+        #train {
+
+            width: 150px;
+            height: 100px;
+            transition: 4s;
+            padding-top:50px;
+            border: 0px;
+            
+        }
+
+        .wrapper {
+            width: 100%;
+            border: 0px;
+        }
+
+        .container {
+            position: relative;
+            container-type: inline-size;
+        }
+
+        @keyframes left-to-right {
+            from {
+                transform: translateX(0%);
+            }
+
+            to {
+                transform: translateX(calc(100vw - 150px));
+            }
+
+        }
+
+        @keyframes right-to-left {
+            from {
+                transform: translateX(calc(100vw - 150px));
+            }
+
+            to {
+                transform: translateX(0%);
+            }
+
+        }
+
+        .move-forward {
+            animation-name: left-to-right;
+            animation-iteration-count: 1;
+            animation-duration: 5s;
+            animation-fill-mode: both;
+            animation-timing-function: linear;
+            animation-delay: 0s;
+            animation-direction: normal;
+            transform: translateX(calc(100vw - 150px));
+        }
+
+        .move-backward {
+            animation-name: right-to-left;
+            animation-iteration-count: 1;
+            animation-duration: 5s;
+            animation-fill-mode: both;
+            animation-timing-function: linear;
+            animation-delay: 0s;
+            animation-direction: normal;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="wrapper">
+            <img src="./train.png" alt="train.png" id="train">
+        </div>
+
+        <p align ='center'class="text">Click the following buttons to handle animations</p>
+        <p align='center'>
+            
+            <button id="start" type="button" align=>Start</button>
+            <button id="stop" type="button">Stop</button>
+
+        </p>
+
+    </div>
+    <script>
+        const start_button = document.getElementById("start")
+        const stop_button = document.getElementById("stop")
+        const wrapper = document.getElementById("wrapper")
+        const train = document.getElementById("train")
+        let direction = 1;
+        wrapper.addEventListener("animationend",()=>{
+            if(direction==1)
+            {
+                train.src = "./train_reversed.png";
+                direction = -1;
+                wrapper.classList.remove("move-forward");
+                wrapper.classList.add("move-backward")
+
+            }
+            else
+            {
+                train.src = "./train.png";
+                wrapper.classList.remove("move-backward");
+                direction = 1;
+                wrapper.classList.remove("move-backward");
+                wrapper.classList.add("move-forward")
+            }
+           
+        },false);
+
+        start_button.onclick = () => {
+            if (direction == 1) {
+                wrapper.style.animationPlayState = 'running';
+                wrapper.classList.remove("move-backward");
+                wrapper.classList.add("move-forward")
+
+            }
+            else {
+                wrapper.style.animationPlayState = 'running';
+                wrapper.classList.remove("move-forward");
+                wrapper.classList.add("move-backward")
+                
+            }
+
+        }
+        stop_button.onclick = () => {
+
+                wrapper.style.animationPlayState = 'paused';
+
+        }
+    </script>
+</body>
+
+</html>

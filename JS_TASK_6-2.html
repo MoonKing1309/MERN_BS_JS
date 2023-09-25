@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS_TASK_6-2</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        .container {
+            display: relative;
+            background-color: rgb(246, 246, 246);
+            max-width: 300px;
+            margin-top: 100px;
+            padding: 20px;
+            border: 2 px outset black;
+
+        }
+
+        .title {
+            text-align: center;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .content {
+            text-align: center;
+            font-weight: 100;
+        }
+
+        .scontent {
+            text-align: center;
+            font-weight: 100;
+            font-size: 12px;
+        }
+
+        .input-group-text {
+            background-color: rgb(229, 234, 237);
+            margin: 0px;
+        }
+
+        button {
+            min-width: 100%;
+        }
+
+        .form-check-label {
+            font-size: smaller;
+        }
+
+        .form-check {
+            display: inline-block;
+        }
+
+        a:link {
+            text-decoration: none;
+            font-size: smaller;
+        }
+
+        .xtra {
+            font-weight: 200;
+        }
+
+        #show-password {
+            padding: 0px;
+
+        }
+
+        #floatingun,
+        #floating_pwd,
+        #floatingem,
+        #floatingfn {
+            color: rgba(0, 0, 0, 0.5);
+            font-size: smaller;
+        }
+
+        .warning-field {
+            border-color: red;
+        }
+
+        .warning-text {
+            color: red !important;
+        }
+
+        .success-field {
+            border-color: green;
+        }
+
+        .success-text {
+            color: green !important;
+        }
+
+        .alert-text {
+            color: hsl(51, 100%, 50%) !important;
+        }
+
+        .alert-field {
+            border-color: hsl(48, 100%, 50%);
+            ;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mb-3">
+        <h1 class="title">Instagram</h1>
+        <h5 class="content">Sign up to see photos and videos from your friends.</53>
+            <div class="col-12">
+                <form novalidate autocomplete="off">
+                    <div class="col-12 mt-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><img src="./email.png" alt=""></span>
+                            <div class="form-floating">
+                                <input type="email" class="form-control" id="mail" placeholder="Email">
+                                <label for="mail" id="floatingem">Email</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><img src="./user.png" alt="user.png"></span>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="name" placeholder="Email">
+                                <label for="name" id="floatingfn">Full Name</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><img src="./user.png" alt=""></span>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="un" placeholder="Username">
+                                <label for="un" id="floatingun">Username</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><img src="./lock.png" alt=""></span>
+                            <div class="form-floating">
+                                <input type="password" class="form-control" placeholder="Password" id="pwd">
+
+                                <label for="pwd" id="floating_pwd">Password</label>
+                            </div>
+                            <span class="input-group-text" id="show-password"><button class="btn" type="button"><img
+                                        id="b1" src="eye_closed.png" /></button></span>
+
+                        </div>
+                    </div>
+                    <h6 class="scontent">People who use our service may have uploaded your contact information to
+                        Instagram. </h6>
+                    <h6 class="scontent">By signing up, you agree to our <a target="_blank"
+                            href="https://help.instagram.com/581066165581870/?locale=en_US">Terms</a> ,<a
+                            target="_blank" href="https://www.facebook.com/privacy/policy">Privacy Policy</a> and <a
+                            target="_blank" href="https://help.instagram.com/1896641480634370/">Cookies Policy</a> .
+                    </h6>
+                    <div class="col-12 mb-3">
+                        <button class="btn btn-primary" type="submit" id="signup">Signup</button>
+                    </div>
+            </div>
+            </form>
+    </div>
+    </div>
+    <p class="xtra" align="center">Already have an account! <a href="./JS_TASK_6-0.html">Log-in here.</a></p>
+
+
+    <script>
+        const email_inp = document.getElementById("mail");
+        const name_inp = document.getElementById("name");
+        const user_inp = document.getElementById("un");
+        const password_inp = document.getElementById("pwd");
+        const o1 = document.getElementById("floatingem");
+        const o2 = document.getElementById("floatingfn");
+        const o3 = document.getElementById("floatingun");
+        const o4 = document.getElementById("floating_pwd");
+        const signup = document.getElementById("signup");
+        let user_state = 0, name_state = 0, email_state = 0, pwd_state = 0;
+
+        email_inp.oninput = () => {
+            o1.innerText = "Email";
+            o1.classList.remove('warning-text');
+            o1.classList.remove('success-text');
+            email_inp.classList.remove('success-field');
+            email_inp.classList.remove('warning-field');
+            let email_var = email_inp.value;
+
+            if (!email_var) {
+                o1.innerText = "This field is required!";
+                o1.classList.add('warning-text');
+                email_inp.classList.add('warning-field');
+                email_state = 0;
+            }
+            else if (!/^[0-9a-zA-Z]+[@]{1}[a-zA-Z]+[\.]{1}com$/.test(email_var)) {
+                o1.classList.add('warning-text');
+                o1.innerText = "Invalid email!";
+                email_inp.classList.add('warning-field');
+                email_state = 0;
+            }
+            else {
+                o1.classList.add('success-text');
+                o1.innerText = "Valid email!";
+                email_inp.classList.add('success-field')
+                email_state = 1;
+            }
+        }
+
+        name_inp.oninput = () => {
+            o2.innerText = "Full Name";
+            o2.classList.remove('warning-text');
+            o2.classList.remove('success-text');
+            name_inp.classList.remove('success-field');
+            name_inp.classList.remove('warning-field');
+            let name_var = name_inp.value;
+
+            if (!name_var) {
+                o2.innerText = "This field is required!";
+                o2.classList.add('warning-text');
+                name_inp.classList.add('warning-field');
+                name_state = 0;
+            }
+            else if (!/^[A-Za-z ']+$/.test(name_var)) {
+                o2.classList.add('warning-text');
+                o2.innerText = "Invalid name!";
+                name_inp.classList.add('warning-field');
+                name_state = 0;
+            }
+            else {
+                o2.classList.add('success-text');
+                o2.innerText = "Valid name!";
+                name_inp.classList.add('success-field')
+                name_state = 1;
+            }
+        }
+        user_inp.oninput = () => {
+            o3.innerText = "Username";
+            o3.classList.remove('warning-text');
+            o3.classList.remove('success-text');
+            user_inp.classList.remove('success-field');
+            user_inp.classList.remove('warning-field');
+            let user_var = user_inp.value;
+
+            if (!user_var) {
+                o3.innerText = "This field is required!";
+                o3.classList.add('warning-text');
+                user_inp.classList.add('warning-field');
+                user_state = 0;
+            }
+            else if (!/^[A-Za-z0-9_@!#$%^&*()-+= ']+$/.test(user_var)) {
+                o3.classList.add('warning-text');
+                o3.innerText = "Invalid username!";
+                user_inp.classList.add('warning-field');
+                user_state = 0;
+            }
+            else {
+                o3.classList.add('success-text');
+                o3.innerText = "Valid username!";
+                user_inp.classList.add('success-field')
+                user_state = 1;
+            }
+        }
+        password_inp.oninput = () => {
+            o4.innerText = "Password";
+            o4.classList.remove('warning-text');
+            o4.classList.remove('success-text');
+            o4.classList.remove('alert-text');
+            password_inp.classList.remove('success-field');
+            password_inp.classList.remove('alert-field');
+            password_inp.classList.remove('warning-field');
+            let password_var = password_inp.value;
+
+            if (!password_var) {
+                o4.innerText = "This field is required!";
+                o4.classList.add('warning-text');
+                password_inp.classList.add('warning-field');
+                pwd_state = 0;
+            }
+            else if ((password_var.length) <= 6) {
+                o4.classList.add('warning-text');
+                o4.innerText = "Weak Password!";
+                password_inp.classList.add('warning-field');
+                pwd_state = 0;
+            }
+            else if ((password_var.length) <= 10) {
+                o4.classList.add('alert-text');
+                o4.innerText = "Strong Password!";
+                password_inp.classList.add('alert-field')
+                pwd_state = 1;
+            }
+            else {
+                o4.classList.add('success-text');
+                o4.innerText = "Very Strong Password!";
+                password_inp.classList.add('success-field')
+                pwd_state = 1;
+            }
+        }
+
+
+
+        const show_password_button = document.getElementById("show-password");
+        const b1 = document.getElementById("b1");
+        show_password_button.onpointerdown = () => {
+            password_inp.setAttribute("type", "text");
+            b1.src = `eye_open.png`;
+
+        }
+        show_password_button.onpointerup = () => {
+            password_inp.setAttribute("type", "password");
+            b1.src = `eye_closed.png`;
+        }
+
+        signup.onclick=()=>{
+            if(name_state==1 && email_state==1 && user_state==1 && pwd_state==1)
+            {
+                alert("Account has been created!")
+                open('./JS_TASK_6-0.html')
+            }
+            else
+            {
+               alert("Check your input!");
+            }
+    }
+/*
+        signup.onclick=()=>
+        {
+            if(name_state==1 && email_state==1 && user_state==1 && pwd_state==1)
+            {
+                open('./JS_TASK_6-0.html/?flag=1','_blank');
+            }
+            else
+            {
+               alert("Check all fields!")
+            }
+        }
+*/
+        
+    </script>
+</body>
+
+</html>
